@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 
 void Register();
 void userManage();
@@ -38,7 +39,7 @@ void Register(){ //menu de registo * main menu
 			printf("\n> ");
 			scanf("%d", &option);
 			getchar();
-			if (option == 1) {
+			/*if (option == 1) {
 				system("clear");
 				validateUser();
 
@@ -84,7 +85,7 @@ void userManage(){ //gestão de utilizadores * main menu
 				listUsers();
 			}
 			*/
-			/*else*/ if (option == 2) {
+			/*else*/ /*if (option == 2) {
 				system("clear");
 				editUsers();
 			}
@@ -93,7 +94,7 @@ void userManage(){ //gestão de utilizadores * main menu
 				removeUser();
 			}
 			*/
-			else if (option == 4) {
+			/*else */if (option == 4) {
 				system("clear");
 				mainMenu();
 			}
@@ -143,7 +144,7 @@ void editUsers(){ // *menu de gestao de utilizadores
 			puts("3 - Alterar Nome de Utilizador");
 			puts("4 - Alterar Palavra-Passe");
 			puts("5 - Retroceder para o Menú de Gestão de Utilizadores");
-			puts("6 - Exit");
+			puts("6 - Sair");
 			printf("\n> ");
 			scanf("%d", &option);
 			getchar();
@@ -174,7 +175,7 @@ void editUsers(){ // *menu de gestao de utilizadores
 			}
 			else {
 				system("clear");
-				puts("> Invalid option! Please try again.");
+				puts("> Opção Inválida. Por favor tente de novo.");
 				sleep(2);
 				system("clear");
 				editUsers();
@@ -185,11 +186,11 @@ void editUsers(){ // *menu de gestao de utilizadores
 void topicManage() { //gestão de tópicos * main menu
 	unsigned int option;
 		while (1) {
-			puts("\n***** Topic Management Menu *****");
-			puts("1 - Create Topic");
-			puts("2 - Modify Topic");
-			puts("3 - Exit to Main Menu");
-			puts("4 - Exit");
+			puts("\n***** Menú de Gestão de Tópicos *****");
+			puts("1 - Criar Tópico");
+			puts("2 - Modificar Tópico");
+			puts("3 - Retroceder para o Ménu Principal");
+			puts("4 - Sair");
 			printf("\n> ");
 			scanf("%d", &option);
 			getchar();
@@ -212,7 +213,7 @@ void topicManage() { //gestão de tópicos * main menu
 			}
 			else {
 				system("clear");
-				puts("> Invalid option! Please try again.");
+				puts("> Opção Inválida. Por favor tente de novo.");
 				sleep(2);
 				system("clear");
 				topicManage();
@@ -231,14 +232,14 @@ void topicManage() { //gestão de tópicos * main menu
 void Stats(){ //estatisticas * main menu
 	unsigned int option;
 		while (1) {
-			puts("\n***** Statistics Menu *****");
-			puts("1 - Number of Active Topics"); //activeTopics
-			puts("2 - List of Most Used Topics"); // mostUsedTopics
-			puts("3 - Total Messages from Choosen Topic"); //criar menu para escolher topico totalMessages
-			puts("4 - Number of Users who Interacted on a Choosen Topic"); //criar menu para escolher topico **userInteractTopic
-			puts("5 - Subscribed Topics by a Specific User"); //subscribeTopicUser
-			puts("6 - Exit to Main Menu ");
-			puts("7 - Exit ");
+			puts("\n***** Menú de Estatísticas *****");
+			puts("1 - Número de Tópicos Ativos"); //activeTopics
+			puts("2 - Lista dos Tópicos Mais Usados"); // mostUsedTopics
+			puts("3 - Número Total de Mensagens de um Determinado Tópico"); //criar menu para escolher topico totalMessages
+			puts("4 - Número de Utilizadores que Interagiram com um Determinado Tópico"); //criar menu para escolher topico **userInteractTopic
+			puts("5 - Tópicos Subscritos por um Determinado Utilizador"); //subscribeTopicUser
+			puts("6 - Retroceder para o Menú Principal ");
+			puts("7 - Sair ");
 			printf("\n> ");
 			scanf("%d", &option);
 			getchar();
@@ -273,7 +274,7 @@ void Stats(){ //estatisticas * main menu
 			}
 			else {
 				system("clear");
-				puts("> Invalid option! Please try again.");
+				puts("> Opção Inválida. Por favor tente de novo.");
 				sleep(2);
 				system("clear");
 				Stats();
@@ -300,14 +301,16 @@ void Stats(){ //estatisticas * main menu
 	//incompleto
 }
 */
+/*
 void validateUser(){ //validar utilizadores * menu registo
 char username[20];
 scanf("%s", &username);
-if(username == "margarida")/*»arranjar forma de ir buscar o input.txt a coluna de username*/	{
+if(username == "margarida") //arranjar forma de ir buscar o input.txt a coluna de username {
 	printf("O nome de utilizador já existe. Insira um novo que não exceda os vinte caracteres. \n");
 
 }
-}
+} */
+
 
 
 /*void Login(){ //verificar se as credenciais de login estão corretas * menu registo
@@ -318,12 +321,12 @@ if(username == "margarida")/*»arranjar forma de ir buscar o input.txt a coluna 
 void mainMenu(){
 unsigned int option;
 	while (1) {
-		puts("\n***** Main Menu *****");
-		puts("1 - Register Menu"); // Register
-		puts("2 - User Management"); // userManage
-		puts("3 - Topic Management"); //topicManage
-		puts("4 - Statistics");//Stats
-    puts("5 - Exit");
+		puts("\n***** Menú Principal *****");
+		puts("1 - Menú de Registo"); // Register
+		puts("2 - Menú de Gestão de Utilizadores"); // userManage
+		puts("3 - Menú de Gestão de Tópicos"); //topicManage
+		puts("4 - Menú de Estatísticas");//Stats
+    puts("5 - Sair");
 		printf("\n> ");
 		scanf("%d", &option);
 		getchar();
@@ -349,7 +352,9 @@ unsigned int option;
 		}
     else{
 			system("clear");
-      puts("> Invalid Option! Please try again.");
+      puts("> Opção Inválida. Por favor tente de novo.");
+			sleep(2);
+			mainMenu();
     }
 	}
 }
