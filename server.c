@@ -39,7 +39,7 @@ void Register(){ //menu de registo * main menu
 			printf("\n> ");
 			scanf("%d", &option);
 			getchar();
-			/*if (option == 1) {
+			if (option == 1) {
 				system("clear");
 				validateUser();
 
@@ -49,7 +49,7 @@ void Register(){ //menu de registo * main menu
 				Login();
 			}
 			*/
-			/*else*/ if (option == 3) {
+			else if (option == 3) {
 				system("clear");
 				mainMenu();
 			}
@@ -301,15 +301,19 @@ void Stats(){ //estatisticas * main menu
 	//incompleto
 }
 */
-/*
-void validateUser(){ //validar utilizadores * menu registo
-char username[20];
-scanf("%s", &username);
-if(username == "margarida") //arranjar forma de ir buscar o input.txt a coluna de username {
-	printf("O nome de utilizador já existe. Insira um novo que não exceda os vinte caracteres. \n");
+void open_usernamepass_file(){ //função para abrir ficheiro que contém usernames
+	FILE *username_pass;
+	/* abertura do ficheiro username.txt no modo de leitura*/
+	username_pass=fopen("username_pass.txt", "r");
 
 }
-} */
+void validateUser(){ //validar utilizadores * menu registo
+//open_usernamepass_file();
+//if("margarida")//debug //arranjar forma de ir buscar o input.txt a coluna de username {
+	puts("O nome de utilizador já existe. Insira um novo que não exceda os vinte caracteres. ");
+
+}
+
 
 
 
@@ -354,6 +358,7 @@ unsigned int option;
 			system("clear");
       puts("> Opção Inválida. Por favor tente de novo.");
 			sleep(2);
+			system("clear");
 			mainMenu();
     }
 	}
