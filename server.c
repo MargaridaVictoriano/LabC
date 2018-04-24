@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#define True
+#define False
 
 void Register();
 void userManage();
@@ -301,16 +303,21 @@ void Stats(){ //estatisticas * main menu
 	//incompleto
 }
 */
-void open_usernamepass_file(){ //função para abrir ficheiro que contém usernames
-	FILE *username_pass;
-	/* abertura do ficheiro username.txt no modo de leitura*/
-	username_pass=fopen("username_pass.txt", "r");
 
-}
 void validateUser(){ //validar utilizadores * menu registo
-//open_usernamepass_file();
-//if("margarida")//debug //arranjar forma de ir buscar o input.txt a coluna de username {
-	puts("O nome de utilizador já existe. Insira um novo que não exceda os vinte caracteres. ");
+	FILE *username_pass;
+	char username[20], userFromClient="Margarida";
+	/* abertura do ficheiro username.txt no modo de leitura*/
+	username_pass = fopen("username_pass.txt", "r");
+	fscanf(username_pass, "%s", &username);
+	if(strcmp(username,userFromClient)==True){  //debug //arranjar forma de ir buscar o input.txt a coluna de username
+		puts("O nome de utilizador já existe. Insira um novo que não exceda os vinte caracteres. ");
+	}
+	else{
+		puts("Nome de utilizador aceite.");
+	}
+	//system("clear");
+	//validateUser();
 
 }
 
