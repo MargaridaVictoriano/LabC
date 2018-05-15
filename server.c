@@ -7,12 +7,12 @@ void userManage();
 void topicManage();
 void Stats();
 void validateUser();
+void listUsers();
 /*void removeUser();
 void changeContact();
 void changeName();
 void changeUsername();
 void changePassword();
-void listUsers();
 void editUsers();
 void createTopic();
 void modifyTopic();
@@ -80,11 +80,10 @@ void userManage(){ //gestão de utilizadores * main menu
 			printf("\n> ");
 			scanf("%d", &option);
 			getchar();
-			/*if (option == 1) {
+			if (option == 1) {
 				system("clear");
 				listUsers();
 			}
-			*/
 			/*else*/ /*if (option == 2) {
 				system("clear");
 				editUsers();
@@ -94,7 +93,7 @@ void userManage(){ //gestão de utilizadores * main menu
 				removeUser();
 			}
 			*/
-			/*else */if (option == 4) {
+			else if (option == 4) {
 				system("clear");
 				mainMenu();
 			}
@@ -132,9 +131,16 @@ void userManage(){ //gestão de utilizadores * main menu
 }
 */
 
-/*void listUsers(){ // *menu de gestao de utilizadores
-
-}*/
+void listUsers(){ // *menu de gestao de utilizadores
+	FILE *allUsers;
+	allUsers = fopen("allUsers.txt", "r");
+	int c;
+	if (allUsers) {
+    while ((c = getc(allUsers)) != EOF)
+        putchar(c);
+    fclose(allUsers);
+}
+}
 void editUsers(){ // *menu de gestao de utilizadores
 	unsigned int option;
 		while (1) {
@@ -332,11 +338,6 @@ void validateUser(){ //validar utilizadores * menu registo
 		fclose(Pendent);
 	}
 
-
-
-
-
-
 /*void Login(){ //verificar se as credenciais de login estão corretas * menu registo
 //incompleto
 }
@@ -388,6 +389,7 @@ int main(void){
 system("clear");
 mainMenu();
 Register();
+listUsers();
 //userManage();
 //Stats();
 return 0;
