@@ -8,6 +8,7 @@ void topicManage();
 void Stats();
 void validateUser();
 void listUsers();
+void Login();
 /*void removeUser();
 void changeContact();
 void changeName();
@@ -22,7 +23,7 @@ void totalMessages();
 void totalMessages();
 void userInteractTopic();
 void subscribeTopicUser();
-void Login();
+
 */
 void mainMenu();
 
@@ -44,11 +45,11 @@ void Register(){ //menu de registo * main menu
 				validateUser();
 
 			}
-			/*else if (option == 2) {
+			else if (option == 2) {
 				system("clear");
 				Login();
 			}
-			*/
+
 			else if (option == 3) {
 				system("clear");
 				mainMenu();
@@ -133,13 +134,15 @@ void userManage(){ //gestão de utilizadores * main menu
 
 void listUsers(){ // *menu de gestao de utilizadores
 	FILE *allUsers;
-	allUsers = fopen("allUsers.txt", "r");
+	allUsers = fopen("Accepted.txt", "r");
 	int c;
 	if (allUsers) {
     while ((c = getc(allUsers)) != EOF)
         putchar(c);
     fclose(allUsers);
 }
+sleep(2);
+system("clear");
 }
 void editUsers(){ // *menu de gestao de utilizadores
 	unsigned int option;
@@ -330,18 +333,38 @@ void validateUser(){ //validar utilizadores * menu registo
 				sleep(2);
 				system("clear");
 			}
-			}
-			fclose(Accepted);
 			fclose(deniedMessage);
 			fclose(acceptedMessage);
+			}
+			fclose(Accepted);
+
 		}
 		fclose(Pendent);
 	}
 
-/*void Login(){ //verificar se as credenciais de login estão corretas * menu registo
-//incompleto
-}
+
+void Login(){ //verificar se as credenciais de login estão corretas * menu registo
+//FILE *UserPass, *Accepted;
+char usernameFromClient[20], username[20];
+printf("\n> Introduza o nome de utilizador:  ");
+printf("\n> Nome de utilizador:  ");
+scanf("%s", &username);
+/*
+UserPass = fopen("UserPass.txt", "r");
+Accepted = fopen("Accepted.txt", "r");
+for(int i=0;fgets(usernameFromClient, 20, Accepted); i++){
+	if(strcmp(usernameFromClient, username) == 0){
+		puts("aaaa"); //debug
+		pause(); //debug
+		puts("Nome de utilizador aceite.");
+	}
+	else{
+		puts("Nome de utilizador incorreto. Por favor tente novamente.");
+		break;
+	}
+	}
 */
+}
 
 void mainMenu(){
 unsigned int option;
