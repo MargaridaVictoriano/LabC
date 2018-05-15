@@ -6,6 +6,7 @@ void Register();
 void userManage();
 void topicManage();
 void Stats();
+void validateUser();
 /*void removeUser();
 void changeContact();
 void changeName();
@@ -21,7 +22,6 @@ void totalMessages();
 void totalMessages();
 void userInteractTopic();
 void subscribeTopicUser();
-void validateUser();
 void Login();
 */
 void mainMenu();
@@ -39,6 +39,7 @@ void Register(){ //menu de registo * main menu
 			scanf("%d", &option);
 			getchar();
 			if (option == 1) {
+				puts("aaaaaaa");//debug
 				system("clear");
 				validateUser();
 
@@ -302,25 +303,33 @@ void Stats(){ //estatisticas * main menu
 */
 
 void validateUser(){ //validar utilizadores * menu registo
-	FILE *username_pass;
-	char username[20] , userFromClient="margarida";
-	/* abertura do ficheiro username.txt no modo de leitura*/
-	username_pass = fopen("username_pass.txt", "r");
-	for(int i=0; i==EOF ;i++){
-		fscanf(username_pass, "%s", &username);
-		if(strcmp(username,userFromClient)==0){  //debug //arranjar forma de ir buscar o input.txt a coluna de username
-			puts("O nome de utilizador já existe. Insira um novo que não exceda os vinte caracteres. ");
-			break;
+	FILE *Pendent, *Accepted; //ficheiro enviado pelo servidor com todos os dados(Pendent) fiheiro com todos os usernames e passwd aceites(Acceptee)
+	char username[20], usernameFromClient[20];
+	Pendent = fopen("Pendent.txt", "r+");
+	for(int i=0; fgets(usernameFromClient, 20, Pendent)!=NULL; i++){
+		Accepted = fopen("Accepted.txt", "r");
+		printf("Pendent= %s\n",usernameFromClient);
+		for(int j=0; fgets(username, 20, Accepted)!=NULL; j++){
+			printf("Accepted= %s\n",username);
+			if(strcmp(usernameFromClient, username) == 0){
+				puts("O nome de utilizador inserido já existe. Por favor defina um novo nome de utilizador que não exceda os 20 caracteres");
+				sleep(5);
+				system("clear");
+				break;
+			}
+			else{
+				puts("Nome de utilizador aceite.");
+				sleep(5);
+				system("clear");
+				//break;
+			}
+			}
+			fclose(Accepted);
+		}
+		fclose(Pendent);
 	}
-		else{
-			puts("Nome de utilizador aceite.");
-	}
-}
-fclose(username_pass);
-	//system("clear");
-	//validateUser();
 
-}
+
 
 
 
@@ -375,7 +384,7 @@ unsigned int option;
 int main(void){
 system("clear");
 mainMenu();
-//Register();
+Register();
 //userManage();
 //Stats();
 return 0;
