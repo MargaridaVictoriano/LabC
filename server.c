@@ -8,7 +8,6 @@ void topicManage();
 void Stats();
 void validateUser();
 void listUsers();
-void Login();
 /*void removeUser();
 void changeContact();
 void changeName();
@@ -23,7 +22,7 @@ void totalMessages();
 void totalMessages();
 void userInteractTopic();
 void subscribeTopicUser();
-
+void Login();
 */
 void mainMenu();
 
@@ -45,11 +44,11 @@ void Register(){ //menu de registo * main menu
 				validateUser();
 
 			}
-			else if (option == 2) {
+			/*else if (option == 2) {
 				system("clear");
 				Login();
 			}
-
+			*/
 			else if (option == 3) {
 				system("clear");
 				mainMenu();
@@ -133,16 +132,17 @@ void userManage(){ //gestão de utilizadores * main menu
 */
 
 void listUsers(){ // *menu de gestao de utilizadores
-	FILE *allUsers;
-	allUsers = fopen("Accepted.txt", "r");
-	int c;
-	if (allUsers) {
-    while ((c = getc(allUsers)) != EOF)
-        putchar(c);
-    fclose(allUsers);
+  FILE *Accepted;
+Accepted = fopen("Accepted.txt", "r");
+int c;
+if (Accepted) {
+  while ((c = getc(Accepted)) != EOF)
+      putchar(c);
+  fclose(Accepted);
 }
 sleep(2);
 system("clear");
+//return;
 }
 void editUsers(){ // *menu de gestao de utilizadores
 	unsigned int option;
@@ -312,59 +312,41 @@ void Stats(){ //estatisticas * main menu
 */
 
 void validateUser(){ //validar utilizadores * menu registo
-	FILE *Pendent, *Accepted, *deniedMessage, *acceptedMessage; //ficheiro enviado pelo servidor com todos os dados(Pendent) fiheiro com todos os usernames e passwd aceites(Acceptee)
+	FILE *Pendent, *Accepted; //ficheiro enviado pelo servidor com todos os dados(Pendent) fiheiro com todos os usernames e passwd aceites(Acceptee)
 	char username[20], usernameFromClient[20];
 	Pendent = fopen("Pendent.txt", "r+");
 	for(int i=0; fgets(usernameFromClient, 20, Pendent)!=NULL; i++){
 		Accepted = fopen("Accepted.txt", "r");
-		//printf("Pendent= %s\n",usernameFromClient); debug
+		printf("Pendent= %s\n",usernameFromClient);
 		for(int j=0; fgets(username, 20, Accepted)!=NULL; j++){
-			//printf("Accepted= %s\n",username); debug
+			printf("Accepted= %s\n",username);
 			if(strcmp(usernameFromClient, username) == 0){
-				deniedMessage = fopen("deniedMessage.txt", "r");
 				puts("O nome de utilizador inserido já existe. Por favor defina um novo nome de utilizador que não exceda os 20 caracteres");
-				sleep(2);
+				sleep(5);
 				system("clear");
 				break;
 			}
 			else{
-				acceptedMessage = fopen("acceptedMessage.txt", "r");
 				puts("Nome de utilizador aceite.");
-				sleep(2);
+				sleep(5);
 				system("clear");
+				//break;
 			}
-			fclose(deniedMessage);
-			fclose(acceptedMessage);
 			}
 			fclose(Accepted);
-
 		}
 		fclose(Pendent);
 	}
 
 
-void Login(){ //verificar se as credenciais de login estão corretas * menu registo
-//FILE *UserPass, *Accepted;
-char usernameFromClient[20], username[20];
-printf("\n> Introduza o nome de utilizador:  ");
-printf("\n> Nome de utilizador:  ");
-scanf("%s", &username);
-/*
-UserPass = fopen("UserPass.txt", "r");
-Accepted = fopen("Accepted.txt", "r");
-for(int i=0;fgets(usernameFromClient, 20, Accepted); i++){
-	if(strcmp(usernameFromClient, username) == 0){
-		puts("aaaa"); //debug
-		pause(); //debug
-		puts("Nome de utilizador aceite.");
-	}
-	else{
-		puts("Nome de utilizador incorreto. Por favor tente novamente.");
-		break;
-	}
-	}
-*/
+
+
+
+
+/*void Login(){ //verificar se as credenciais de login estão corretas * menu registo
+//incompleto
 }
+*/
 
 void mainMenu(){
 unsigned int option;
