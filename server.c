@@ -303,28 +303,31 @@ void Stats(){ //estatisticas * main menu
 */
 
 void validateUser(){ //validar utilizadores * menu registo
-	FILE *Pendent, *Accepted; //ficheiro enviado pelo servidor com todos os dados(Pendent) fiheiro com todos os usernames e passwd aceites(Acceptee)
+	FILE *Pendent, *Accepted, *deniedMessage, *acceptedMessage; //ficheiro enviado pelo servidor com todos os dados(Pendent) fiheiro com todos os usernames e passwd aceites(Acceptee)
 	char username[20], usernameFromClient[20];
 	Pendent = fopen("Pendent.txt", "r+");
 	for(int i=0; fgets(usernameFromClient, 20, Pendent)!=NULL; i++){
 		Accepted = fopen("Accepted.txt", "r");
-		printf("Pendent= %s\n",usernameFromClient);
+		//printf("Pendent= %s\n",usernameFromClient); debug
 		for(int j=0; fgets(username, 20, Accepted)!=NULL; j++){
-			printf("Accepted= %s\n",username);
+			//printf("Accepted= %s\n",username); debug
 			if(strcmp(usernameFromClient, username) == 0){
+				deniedMessage = fopen("deniedMessage.txt", "r");
 				puts("O nome de utilizador inserido já existe. Por favor defina um novo nome de utilizador que não exceda os 20 caracteres");
-				sleep(5);
+				sleep(2);
 				system("clear");
 				break;
 			}
 			else{
+				acceptedMessage = fopen("acceptedMessage.txt", "r");
 				puts("Nome de utilizador aceite.");
-				sleep(5);
+				sleep(2);
 				system("clear");
-				//break;
 			}
 			}
 			fclose(Accepted);
+			fclose(deniedMessage);
+			fclose(acceptedMessage);
 		}
 		fclose(Pendent);
 	}
