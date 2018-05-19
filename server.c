@@ -1,4 +1,6 @@
 #define _GNU_SOURCE
+#define MAX 256
+#define MAX1 400
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -11,12 +13,13 @@ void Stats();
 int validateUser();
 void listUsers();
 void mainMenu();
+int removeUser();
+int changeContact();
+int changeName();
+int changeUsername();
 
-/*void removeUser();
-void changeContact();
-void changeName();
-void changeUsername();
-void changePassword();
+/*
+int changePassword();
 void editUsers();
 void createTopic();
 void modifyTopic();
@@ -86,11 +89,11 @@ void userManage(){ //gestão de utilizadores * main menu
 				system("clear");
 				editUsers();
 			}
-			/*else if (option == 3) {
+			else if (option == 3) {
 				system("clear");
 				removeUser();
 			}
-			*/
+
 			else if (option == 4) {
 				system("clear");
 				mainMenu();
@@ -108,29 +111,288 @@ void userManage(){ //gestão de utilizadores * main menu
 			}
 		}
 }
-/*void removeUser(){ // *menu de gestao de utilizadores
-//incompleto
+int removeUser(){ // *menu de gestao de utilizadores
+int lno, ctr = 0;
+char ch;
+FILE *fptr1, *fptr2;
+char fname[MAX];
+char str[MAX], temp[] = "temp.txt";
+printf("\n\n Eliminar um determinado utilizador :\n");
+printf("-----------------------------------------\n");
+printf(" Introduza o nome do ficheiro : ");
+scanf("%s",fname);
+fptr1 = fopen(fname, "r");
+if (!fptr1)
+{
+				printf(" Ficheiro não encontrado ou não é possivel abrir o ficheiro.\n");
+				sleep(2);
+				system("clear");
+				return 0;
 }
-*/
+fptr2 = fopen(temp, "w"); // abre o ficheiro temporário em modo de leitura
+if (!fptr2)
+{
+				printf("Não é possivel abrir um ficheiro temporário.\n");
+				fclose(fptr1);
+				return 0;
+}
+printf(" Escreva o número da linha que pretende remover : ");
+scanf("%d", &lno);
+lno++;
+// copia todo o conteudo exceto a linha em especifico
+while (!feof(fptr1))
+{
+		strcpy(str, "\0");
+		fgets(str, MAX, fptr1);
+		if (!feof(fptr1))
+		{
+				ctr++;
+				/*salta a linha */
+				if (ctr != lno)
+				{
+						fprintf(fptr2, "%s", str);
+				}
+		}
+}
+fclose(fptr1);
+fclose(fptr2);
+remove(fname);  		// remove o ficheiro original
+rename(temp, fname); 	// renomear o ficheiro temporario com o nome original
+/*------ ler o ficheiro ----------------*/
+fptr1=fopen(fname,"r");
+		ch=fgetc(fptr1);
+	printf(" O conteúdo do ficheiro %s é : \n",fname);
+	while(ch!=EOF)
+		{
+				printf("%c",ch);
+				 ch=fgetc(fptr1);
+		}
+fclose(fptr1);
+sleep(3);
+system("clear");
+return 0;
+}
 
-/*void changeContact(){ // *menu de gestao de utilizadores
-// incompleto
-}
+int changeContact(){ // *menu de gestao de utilizadores
+	//char ch;
+	FILE *fptr1, *fptr2;
+	int lno, linectr = 0;
+	char str[MAX1],fname[MAX1];
+	char newln[MAX1], temp[] = "temp.txt";
+//primeira linha tem indice 0
+//ficheiro a abrir e contacto.txt
+
+printf("\n\n ******************** Alterar Contacto ******************** :\n");
+printf("-------------------------------------------------------------\n");
+printf(" Nome do ficheiro a alterar : ");
+	fgets(fname, MAX1 , stdin);
+	fname[strlen(fname) - 1] = '\0';
+	fptr1 = fopen(fname, "r");
+	if (!fptr1)
+	{
+					printf("Não foi possível abrir o ficheiro.\n");
+					return 0;
+	}
+	fptr2 = fopen(temp, "w");
+	if (!fptr2)
+	{
+					printf("Não foi possível abrir o ficheiro temporário.\n");
+					fclose(fptr1);
+					return 0;
+	}
+	/* get the new line from the user */
+	printf(" Escreva o novo contacto : ");
+	fgets(newln,MAX1, stdin);
+	/* get the line number to delete the specific line */
+	printf(" Escreva a linha que pretende alterar : ");
+	scanf("%d", &lno);
+	lno++;
+	 // copy all contents to the temporary file other except specific line
+	while (!feof(fptr1))
+	{
+			strcpy(str, "\0");
+			fgets(str, MAX1, fptr1);
+			if (!feof(fptr1))
+			{
+					linectr++;
+					if (linectr != lno)
+							{
+									fprintf(fptr2, "%s", str);
+							}
+							else
+							{
+									fprintf(fptr2, "%s", newln);
+							}
+					}
+	}
+/*  fptr2=fopen(temp,"r");
+					 ch=fgetc(fptr2);
+				 printf(" Now the content of the file %s is : \n",fname);
+				 while(ch!=EOF)
+					 {
+							 printf("%c",ch);
+								ch=fgetc(fptr1);
+					 }
 */
-/*void changeName(){ // *menu de gestao de utilizadores
-//incompleto
+	fclose(fptr1);
+	fclose(fptr2);
+	remove(fname);
+	rename(temp, fname);
+	printf(" Alteração realizada com sucesso! \n");
+	sleep(2);
+	system("clear");
+	return 0;
 }
+
+int changeName(){ // *menu de gestao de utilizadores
+	//ficheiro a abrir e nome.txt
+	//char ch;
+	FILE *fptr1, *fptr2;
+	int lno, linectr = 0;
+	char str[MAX1],fname[MAX1];
+	char newln[MAX1], temp[] = "temp.txt";
+//primeira linha tem indice 0
+
+printf("\n\n ******************** Alterar Nome ******************** :\n");
+printf("-------------------------------------------------------------\n");
+printf(" Nome do ficheiro a alterar : ");
+	fgets(fname, MAX1 , stdin);
+	fname[strlen(fname) - 1] = '\0';
+	fptr1 = fopen(fname, "r");
+	if (!fptr1)
+	{
+					printf("Não foi possível abrir o ficheiro.\n");
+					return 0;
+	}
+	fptr2 = fopen(temp, "w");
+	if (!fptr2)
+	{
+					printf("Não foi possível abrir o ficheiro temporário.\n");
+					fclose(fptr1);
+					return 0;
+	}
+	/* get the new line from the user */
+	printf(" Escreva o novo nome : ");
+	fgets(newln,MAX1, stdin);
+	/* get the line number to delete the specific line */
+	printf(" Escreva a linha que pretende alterar : ");
+	scanf("%d", &lno);
+	lno++;
+	 // copy all contents to the temporary file other except specific line
+	while (!feof(fptr1))
+	{
+			strcpy(str, "\0");
+			fgets(str, MAX1, fptr1);
+			if (!feof(fptr1))
+			{
+					linectr++;
+					if (linectr != lno)
+							{
+									fprintf(fptr2, "%s", str);
+							}
+							else
+							{
+									fprintf(fptr2, "%s", newln);
+							}
+					}
+	}
+/*  fptr2=fopen(temp,"r");
+					 ch=fgetc(fptr2);
+				 printf(" Now the content of the file %s is : \n",fname);
+				 while(ch!=EOF)
+					 {
+							 printf("%c",ch);
+								ch=fgetc(fptr1);
+					 }
 */
-/*void changeUsername(){ // *menu de gestao de utilizadores
-//incompleto
-}*/
-/*void changePassword(){ // *menu de gestao de utilizadores
-//incompleto
+	fclose(fptr1);
+	fclose(fptr2);
+	remove(fname);
+	rename(temp, fname);
+	printf(" Alteração realizada com sucesso! \n");
+	sleep(2);
+	system("clear");
+	return 0;
+}
+
+int changeUsername(){ // *menu de gestao de utilizadores
+	//ficheiro a abrir e Accepted.txt
+	//char ch;
+	FILE *fptr1, *fptr2;
+	int lno, linectr = 0;
+	char str[MAX1],fname[MAX1];
+	char newln[MAX1], temp[] = "temp.txt";
+//primeira linha tem indice 0
+
+printf("\n\n ******************** Alterar Nome ******************** :\n");
+printf("-------------------------------------------------------------\n");
+printf(" Nome do ficheiro a alterar : ");
+	fgets(fname, MAX1 , stdin);
+	fname[strlen(fname) - 1] = '\0';
+	fptr1 = fopen(fname, "r");
+	if (!fptr1)
+	{
+					printf("Não foi possível abrir o ficheiro.\n");
+					return 0;
+	}
+	fptr2 = fopen(temp, "w");
+	if (!fptr2)
+	{
+					printf("Não foi possível abrir o ficheiro temporário.\n");
+					fclose(fptr1);
+					return 0;
+	}
+	/* get the new line from the user */
+	printf(" Escreva o novo nome : ");
+	fgets(newln,MAX1, stdin);
+	/* get the line number to delete the specific line */
+	printf(" Escreva a linha que pretende alterar : ");
+	scanf("%d", &lno);
+	lno++;
+	 // copy all contents to the temporary file other except specific line
+	while (!feof(fptr1))
+	{
+			strcpy(str, "\0");
+			fgets(str, MAX1, fptr1);
+			if (!feof(fptr1))
+			{
+					linectr++;
+					if (linectr != lno)
+							{
+									fprintf(fptr2, "%s", str);
+							}
+							else
+							{
+									fprintf(fptr2, "%s", newln);
+							}
+					}
+	}
+/*  fptr2=fopen(temp,"r");
+					 ch=fgetc(fptr2);
+				 printf(" Now the content of the file %s is : \n",fname);
+				 while(ch!=EOF)
+					 {
+							 printf("%c",ch);
+								ch=fgetc(fptr1);
+					 }
+*/
+	fclose(fptr1);
+	fclose(fptr2);
+	remove(fname);
+	rename(temp, fname);
+	printf(" Alteração realizada com sucesso! \n");
+	sleep(2);
+	system("clear");
+	return 0;
+}
+/*int changePassword(){ // *menu de gestao de utilizadores
+
 }
 */
 
 void listUsers(){ // *menu de gestao de utilizadores
   FILE *Accepted;
+puts("******Lista de Utilizadores******");
 Accepted = fopen("Accepted.txt", "r");
 int c;
 if (Accepted) {
@@ -155,7 +417,7 @@ void editUsers(){ // *menu de gestao de utilizadores
 			printf("\n> ");
 			scanf("%d", &option);
 			getchar();
-			/*if (option == 1) {
+			if (option == 1) {
 				system("clear");
 				changeContact();
 			}
@@ -167,12 +429,13 @@ void editUsers(){ // *menu de gestao de utilizadores
 				system("clear");
 				changeUsername();
 			}
+			
 			else if (option == 4) {
 				system("clear");
 				changePassword();
 			}
-			*/
-			/*else */if (option == 5) {
+		
+			else if (option == 5) {
 				system("clear");
 				userManage();
 			}
