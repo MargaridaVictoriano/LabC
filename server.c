@@ -134,6 +134,8 @@ if (!fptr2)
 {
 				printf("Não é possivel abrir um ficheiro temporário.\n");
 				fclose(fptr1);
+				sleep(2);
+				system("clear");
 				return 0;
 }
 printf(" Escreva o número da linha que pretende remover : ");
@@ -191,6 +193,8 @@ printf(" Nome do ficheiro a alterar : ");
 	if (!fptr1)
 	{
 					printf("Não foi possível abrir o ficheiro.\n");
+					sleep(2);
+					system("clear");
 					return 0;
 	}
 	fptr2 = fopen(temp, "w");
@@ -198,6 +202,8 @@ printf(" Nome do ficheiro a alterar : ");
 	{
 					printf("Não foi possível abrir o ficheiro temporário.\n");
 					fclose(fptr1);
+					sleep(2);
+					system("clear");
 					return 0;
 	}
 	/* get the new line from the user */
@@ -262,6 +268,8 @@ printf(" Nome do ficheiro a alterar : ");
 	if (!fptr1)
 	{
 					printf("Não foi possível abrir o ficheiro.\n");
+					sleep(2);
+					system("clear");
 					return 0;
 	}
 	fptr2 = fopen(temp, "w");
@@ -269,6 +277,8 @@ printf(" Nome do ficheiro a alterar : ");
 	{
 					printf("Não foi possível abrir o ficheiro temporário.\n");
 					fclose(fptr1);
+					sleep(2);
+					system("clear");
 					return 0;
 	}
 	/* get the new line from the user */
@@ -333,6 +343,8 @@ printf(" Nome do ficheiro a alterar : ");
 	if (!fptr1)
 	{
 					printf("Não foi possível abrir o ficheiro.\n");
+					sleep(2);
+					system("clear");
 					return 0;
 	}
 	fptr2 = fopen(temp, "w");
@@ -340,6 +352,8 @@ printf(" Nome do ficheiro a alterar : ");
 	{
 					printf("Não foi possível abrir o ficheiro temporário.\n");
 					fclose(fptr1);
+					sleep(2);
+					system("clear");
 					return 0;
 	}
 	/* get the new line from the user */
@@ -385,10 +399,81 @@ printf(" Nome do ficheiro a alterar : ");
 	system("clear");
 	return 0;
 }
-/*int changePassword(){ // *menu de gestao de utilizadores
+int changePassword(){ // *menu de gestao de utilizadores
+	//char ch;
+	FILE *fptr1, *fptr2;
+	int lno, linectr = 0;
+	char str[MAX1],fname[MAX1];
+	char newln[MAX1], temp[] = "temp.txt";
+	//primeira linha tem indice 0
 
+	printf("\n\n ******************** Alterar Palavra-Passe de Acesso Root ******************** :\n");
+	printf("-------------------------------------------------------------\n");
+	//ficheiro rootpass.txt
+	printf(" Nome do ficheiro a alterar : ");
+	fgets(fname, MAX1 , stdin);
+	fname[strlen(fname) - 1] = '\0';
+	fptr1 = fopen(fname, "r");
+	if (!fptr1)
+	{
+					printf("Não foi possível abrir o ficheiro.\n");
+					sleep(2);
+					system("clear");
+					return 0;
+	}
+	fptr2 = fopen(temp, "w");
+	if (!fptr2)
+	{
+					printf("Não foi possível abrir o ficheiro temporário.\n");
+					fclose(fptr1);
+					sleep(2);
+					system("clear");
+					return 0;
+	}
+	/* get the new line from the user */
+	printf(" Escreva a nova palavra-passe de acesso root de quatro caracteres : ");
+	fgets(newln,MAX1, stdin);
+	/* get the line number to delete the specific line */
+	printf(" Escreva a linha que pretende alterar : "); // é sempre a linha 0
+	scanf("%d", &lno);
+	lno++;
+	 // copy all contents to the temporary file other except specific line
+	while (!feof(fptr1))
+	{
+			strcpy(str, "\0");
+			fgets(str, MAX1, fptr1);
+			if (!feof(fptr1))
+			{
+					linectr++;
+					if (linectr != lno)
+							{
+									fprintf(fptr2, "%s", str);
+							}
+							else
+							{
+									fprintf(fptr2, "%s", newln);
+							}
+					}
+	}
+	/*  fptr2=fopen(temp,"r");
+					 ch=fgetc(fptr2);
+				 printf(" Now the content of the file %s is : \n",fname);
+				 while(ch!=EOF)
+					 {
+							 printf("%c",ch);
+								ch=fgetc(fptr1);
+					 }
+	*/
+	fclose(fptr1);
+	fclose(fptr2);
+	remove(fname);
+	rename(temp, fname);
+	printf(" Alteração realizada com sucesso! \n");
+	sleep(2);
+	system("clear");
+	return 0;
 }
-*/
+
 
 void listUsers(){ // *menu de gestao de utilizadores
   FILE *Accepted;
@@ -429,12 +514,11 @@ void editUsers(){ // *menu de gestao de utilizadores
 				system("clear");
 				changeUsername();
 			}
-			
 			else if (option == 4) {
 				system("clear");
 				changePassword();
 			}
-		
+
 			else if (option == 5) {
 				system("clear");
 				userManage();
