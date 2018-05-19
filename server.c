@@ -3,12 +3,15 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+void Login();
 void Register();
 void userManage();
 void topicManage();
 void Stats();
 int validateUser();
 void listUsers();
+void mainMenu();
+
 /*void removeUser();
 void changeContact();
 void changeName();
@@ -23,19 +26,17 @@ void totalMessages();
 void totalMessages();
 void userInteractTopic();
 void subscribeTopicUser();
-void Login();
+
 */
 
-void mainMenu();
 
 void Register(){ //menu de registo * main menu
 	unsigned int option;
 		while (1) {
 			puts("\n***** Menú de Registo *****");
 			puts("1 - Validar Utilizador");
-			puts("2 - Login");
-			puts("3 - Retroceder para o Menú Principal");
-			puts("4 - Sair");
+			puts("2 - Retroceder para o Menú Principal");
+			puts("3 - Sair");
 			printf("\n> Introduza uma das opções dadas ");
 			printf("\n> ");
 			scanf("%d", &option);
@@ -48,14 +49,9 @@ void Register(){ //menu de registo * main menu
 			}
 			else if (option == 2) {
 				system("clear");
-				Login();
-			}
-
-			else if (option == 3) {
-				system("clear");
 				mainMenu();
 			}
-			else if (option == 4) {
+			else if (option == 3) {
 				system("clear");
 				exit(0);
 			}
@@ -364,10 +360,16 @@ void Login(){
 	rootpass = fopen("rootpass.txt", "r");
 	fgets(rootpass1,5, rootpass);
 	  if((strcmp(kuser,admin1) == 0) && (strcmp(password, rootpass1))==0){
-	    puts("correto");
+	    puts("Nome de utilizador e palavra-passe corretos. Bem-vindo!");
+			sleep(2);
+			system("clear");
+			mainMenu();
 	  }
 	  else{
-	    puts("errado");
+	    puts("Nome de utilizador ou palavra-passe errados. Por favor tente novamente.");
+			sleep(2);
+			system("clear");
+			Login();
 	  }
 
 }
@@ -418,9 +420,11 @@ unsigned int option;
 
 int main(void){
 system("clear");
-mainMenu();
-Register();
-listUsers();
+Login();
+//mainMenu();
+//Register();
+//listUsers();
+
 //userManage();
 //Stats();
 return 0;
