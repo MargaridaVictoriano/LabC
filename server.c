@@ -1,3 +1,4 @@
+#define _GNU_SOURCE
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -6,7 +7,7 @@ void Register();
 void userManage();
 void topicManage();
 void Stats();
-void validateUser();
+int validateUser();
 void listUsers();
 /*void removeUser();
 void changeContact();
@@ -312,53 +313,62 @@ void Stats(){ //estatisticas * main menu
 }
 */
 
-void validateUser(){ //validar utilizadores * menu registo
-	FILE *Pendent, *Accepted; //ficheiro enviado pelo servidor com todos os dados(Pendent) fiheiro com todos os usernames e passwd aceites(Acceptee)
-	char username[20], usernameFromClient[20];
-	Pendent = fopen("Pendent.txt", "r+");
-	for(int i=0; fgets(usernameFromClient, 20, Pendent)!=NULL; i++){
-		Accepted = fopen("Accepted.txt", "a+");
-		printf("Pendent= %s\n",usernameFromClient);//debug
-		for(int j=0; fgets(username, 20, Accepted)!=NULL; j++){
-			printf("Accepted= %s\n",username);//debug
-			
-			if(strcmp(usernameFromClient, username) == 0){
-				puts("O nome de utilizador inserido já existe. Por favor defina um novo nome de utilizador que não exceda os 20 caracteres");
-				sleep(5);
-				system("clear");
-				break;
-			}
-			else{
-				puts("Nome de utilizador aceite.");
-				fputs(usernameFromClient, Accepted);
-				sleep(5);
-				system("clear");
-				//break;
-			}
-			}
-			fclose(Accepted);
-		}
-		fclose(Pendent);
-	}
+int validateUser()
+{
+    FILE * Accepted, *Pendent;
+    char * line = NULL;
+    size_t len = 0;
+    ssize_t read;
+    char usernameFromClient[20];
 
+    Accepted = fopen("Accepted.txt", "a+");
+    if (Accepted == NULL)
+        exit(EXIT_FAILURE);
+    Pendent = fopen("Pendent.txt", "r+");
+    fgets(usernameFromClient, 20, Pendent);
+    printf("Pendent= %s\n",usernameFromClient);//debug
+
+    while ((read = getline(&line, &len, Accepted)) != -1) { //le Accepted.txt linha a linha
+        printf("Retrieved line of length %zu :\n", read);//debug
+        printf("%s", line);// debug
+        if(strcmp(line, usernameFromClient) == 0){
+          puts("> Nome de utilizador já existente. Por favor escolha um novo que não exceda os 20 carateres.");
+					sleep(3);
+					system("clear");
+          return 0;
+
+        }
+      }
+          puts(">Nome de utilizador aceite.");
+          fputs(usernameFromClient, Accepted);
+
+    fclose(Accepted);
+    fclose(Pendent);
+		sleep(3);
+		system("clear");
+		return 0;
+}
 
 void Login(){
-	FILE *UserPass, *Accepted;
-	char username[20], usernameFromClient[20];
+	char kuser[5],admin1[5], rootpass1[5], password[5];
+	FILE *admin, *rootpass;
 	puts("*****************Login*****************");
 	printf("\n> Introduza o nome de utilizador:  ");
 	printf("\n> Nome de utilizador:");
-	scanf("%s", &username);
-	printf("veruser= %s\n",username); //debug
-	Accepted = fopen("Accepted.txt", "r");
-	for(int i=0; fgets(usernameFromClient,100, Accepted)!=NULL; i++){
-		printf("ver= %s\n",username); //debug
-		if(strcmp(username,usernameFromClient)==0)
-			puts("Nome de utilizador aceite.");
-	}
-	fclose(Accepted);
-
-
+	scanf("%s", kuser);
+	printf("\n> Introduza a palavra-passe:  ");
+	printf("\n> palavra-passe:");
+	scanf("%s", password);
+	admin = fopen("admin.txt", "r");
+	fgets(admin1, 5,admin );
+	rootpass = fopen("rootpass.txt", "r");
+	fgets(rootpass1,5, rootpass);
+	  if((strcmp(kuser,admin1) == 0) && (strcmp(password, rootpass1))==0){
+	    puts("correto");
+	  }
+	  else{
+	    puts("errado");
+	  }
 
 }
 
