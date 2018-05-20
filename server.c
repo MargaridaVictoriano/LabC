@@ -21,16 +21,12 @@ void editUsers();
 int createTopic();
 void listTopic();
 void modifyTopic();
+void userInteractTopic();
 /*
-
-
-
 void activeTopics();
 void mostUsedTopics();
 void totalMessages();
-void userInteractTopic();
 void subscribeTopicUser();
-
 */
 
 
@@ -668,10 +664,10 @@ void Stats(){ //estatisticas * main menu
 			puts("1 - Número de Tópicos Ativos"); //activeTopics
 			puts("2 - Lista dos Tópicos Mais Usados"); // mostUsedTopics
 			puts("3 - Número Total de Mensagens de um Determinado Tópico"); //criar menu para escolher topico totalMessages
-			puts("4 - Número de Utilizadores que Interagiram com um Determinado Tópico"); //criar menu para escolher topico **userInteractTopic
-			puts("5 - Tópicos Subscritos por um Determinado Utilizador"); //subscribeTopicUser
-			puts("6 - Retroceder para o Menú Principal ");
-			puts("7 - Sair ");
+		//	puts("4 - Número de Utilizadores que Interagiram com um Determinado Tópico"); //criar menu para escolher topico **userInteractTopic
+			puts("4 - Tópicos Subscritos por um Determinado Utilizador"); //subscribeTopicUser
+			puts("5 - Retroceder para o Menú Principal ");
+			puts("6 - Sair ");
 			printf("\n> ");
 			scanf("%d", &option);
 			getchar();
@@ -686,21 +682,22 @@ void Stats(){ //estatisticas * main menu
 			else if (option == 3) {
 				system("clear");
 				totalMessages();
-			}
-			else if (option == 4) {
+			}*/
+			/*else*/ if (option == 4) {
 				system("clear");
 				userInteractTopic();
 			}
-			else if (option == 5) {
+			/*
+			else if (option == 4) {
 				system("clear");
 				subscribeTopicUser();
 			}
-			*/
-			/*else*/ if (option == 6){
+
+			/*else*/ if (option == 5){
 				system("clear");
 				mainMenu();
 			}
-			else if (option == 7) {
+			else if (option == 6) {
 				system("clear");
 				exit(0);
 			}
@@ -713,10 +710,10 @@ void Stats(){ //estatisticas * main menu
 			}
 		}
 }
-/*void activeTopics(){ //menu estatisticas
-	//incompleto
+void activeTopics(){ //menu estatisticas
+
 }
-*/
+
 /*void mostUsedTopics(){ //menu estatisticas
 	//incompleto
 }
@@ -725,10 +722,26 @@ void Stats(){ //estatisticas * main menu
 	//incompleto
 }
 */
-/*void userInteractTopic(){ //menu estaticas
-	//incompleto
+void userInteractTopic(){ //menu estaticas
+	FILE *fp;
+  char fname[MAX1];
+puts("****************************************** Tópicos Subscritos por um Determinado Utilizador ****************************************");
+	printf("------------------------------------------------------------------------------------------------------------------------------------\n");
+printf("Nome do ficheiro. Certifique-se tem a extensão .txt : ");
+scanf("%s", fname);
+printf("var=%s\n", fname); //debug
+fp = fopen(fname, "r");
+int c;
+if (fp) {
+  while ((c = getc(fp)) != EOF)
+      putchar(c);
+  fclose(fp);
 }
-*/
+sleep(4);
+system("clear");
+Stats();
+}
+
 /*void subscribeTopicUser(){ //menu estaticas
 	//incompleto
 }
