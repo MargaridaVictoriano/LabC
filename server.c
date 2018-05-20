@@ -24,13 +24,6 @@ void modifyTopic();
 void userInteractTopic();
 void activeTopics();
 void mostUsedTopics();
-/*
-
-
-void totalMessages();
-void subscribeTopicUser();
-*/
-
 
 void Register(){ //menu de registo * main menu
 	unsigned int option;
@@ -671,11 +664,9 @@ void Stats(){ //estatisticas * main menu
 			printf("----------------------------------------------\n");
 			puts("1 - Número de Tópicos Ativos"); //activeTopics
 			puts("2 - Lista dos Tópicos Mais Usados"); // mostUsedTopics
-			puts("3 - Número Total de Mensagens de um Determinado Tópico"); //criar menu para escolher topico totalMessages
-		//	puts("4 - Número de Utilizadores que Interagiram com um Determinado Tópico"); //criar menu para escolher topico **userInteractTopic
-			puts("4 - Tópicos Subscritos por um Determinado Utilizador"); //subscribeTopicUser
-			puts("5 - Retroceder para o Menú Principal ");
-			puts("6 - Sair ");
+			puts("3 - Tópicos Subscritos por um Determinado Utilizador"); //userInteractTopic
+			puts("4 - Retroceder para o Menú Principal ");
+			puts("5 - Sair ");
 			printf("\n> ");
 			scanf("%d", &option);
 			getchar();
@@ -688,26 +679,17 @@ void Stats(){ //estatisticas * main menu
 				system("clear");
 				mostUsedTopics();
 			}
-			/*
+
 			else if (option == 3) {
-				system("clear");
-				totalMessages();
-			}*/
-			else if (option == 4) {
 				system("clear");
 				userInteractTopic();
 			}
-			/*
-			else if (option == 4) {
-				system("clear");
-				subscribeTopicUser();
-			}
-*/
-			else if (option == 5){
+
+			else if (option == 4){
 				system("clear");
 				mainMenu();
 			}
-			else if (option == 6) {
+			else if (option == 5) {
 				system("clear");
 				exit(0);
 			}
@@ -751,11 +733,6 @@ void mostUsedTopics(){ //menu estatisticas
 	system("clear");
 	Stats();
 }
-
-/*void totalMessages(){ //menu estaticas
-	//incompleto
-}
-*/
 void userInteractTopic(){ //menu estaticas
 	FILE *fp;
   char fname[MAX1];
