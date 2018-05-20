@@ -22,8 +22,9 @@ int createTopic();
 void listTopic();
 void modifyTopic();
 void userInteractTopic();
-/*
 void activeTopics();
+/*
+
 void mostUsedTopics();
 void totalMessages();
 void subscribeTopicUser();
@@ -671,10 +672,11 @@ void Stats(){ //estatisticas * main menu
 			printf("\n> ");
 			scanf("%d", &option);
 			getchar();
-			/*if (option == 1) {
+			if (option == 1) {
 				system("clear");
 				activeTopics();
 			}
+			/*
 			else if (option == 2) {
 				system("clear");
 				mostUsedTopics();
@@ -683,7 +685,7 @@ void Stats(){ //estatisticas * main menu
 				system("clear");
 				totalMessages();
 			}*/
-			/*else*/ if (option == 4) {
+			else if (option == 4) {
 				system("clear");
 				userInteractTopic();
 			}
@@ -692,8 +694,8 @@ void Stats(){ //estatisticas * main menu
 				system("clear");
 				subscribeTopicUser();
 			}
-
-			/*else*/ if (option == 5){
+*/
+			else if (option == 5){
 				system("clear");
 				mainMenu();
 			}
@@ -711,7 +713,19 @@ void Stats(){ //estatisticas * main menu
 		}
 }
 void activeTopics(){ //menu estatisticas
+	puts("****************************************** Número de Tópicos Ativos ****************************************");
+	printf("--------------------------------------------------------------------------------------------------------------\n");
+	unsigned int number_of_lines = 0;
+	FILE *f = fopen("alltopics.txt", "r");
+	int ch;
 
+	while (EOF != (ch=getc(f)))
+			if ('\n' == ch)
+					++number_of_lines;
+	printf("%u\n", number_of_lines);
+sleep(2);
+system("clear");
+Stats();
 }
 
 /*void mostUsedTopics(){ //menu estatisticas
