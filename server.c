@@ -23,9 +23,10 @@ void listTopic();
 void modifyTopic();
 void userInteractTopic();
 void activeTopics();
+void mostUsedTopics();
 /*
 
-void mostUsedTopics();
+
 void totalMessages();
 void subscribeTopicUser();
 */
@@ -34,7 +35,8 @@ void subscribeTopicUser();
 void Register(){ //menu de registo * main menu
 	unsigned int option;
 		while (1) {
-			puts("\n***** Menú de Registo *****");
+			printf("\n\n******************** Menú de Registo ******************** \n");
+			printf("---------------------------------------------------------\n");
 			puts("1 - Validar Utilizador");
 			puts("2 - Retroceder para o Menú Principal");
 			puts("3 - Sair");
@@ -69,7 +71,8 @@ void Register(){ //menu de registo * main menu
 void userManage(){ //gestão de utilizadores * main menu
 	unsigned int option;
 		while (1) {
-			puts("\n***** Menú de Gestão de Utilizadores *****");
+			printf("\n\n************ Menú de Gestão de Utilizadores ************\n");
+			printf("--------------------------------------------------------\n");
 			puts("1 - Listar todos os Utilizadores");
 			puts("2 - Editar Utilizadores");
 			puts("3 - Remover Utilizadores");
@@ -115,8 +118,8 @@ char ch;
 FILE *fptr1, *fptr2;
 char fname[MAX];
 char str[MAX], temp[] = "temp.txt";
-printf("\n\n Eliminar um determinado utilizador :\n");
-printf("-----------------------------------------\n");
+printf("\n\n *********** Eliminar um determinado utilizador ***********\n");
+printf("-----------------------------------------------------------\n");
 printf(" Introduza o nome do ficheiro : ");
 scanf("%s",fname);
 fptr1 = fopen(fname, "r");
@@ -182,7 +185,7 @@ int changeContact(){ // *menu de gestao de utilizadores
 //primeira linha tem indice 0
 //ficheiro a abrir e contacto.txt
 
-printf("\n\n ******************** Alterar Contacto ******************** :\n");
+printf("\n\n ******************** Alterar Contacto ********************* \n");
 printf("-------------------------------------------------------------\n");
 printf(" Nome do ficheiro a alterar : ");
 	fgets(fname, MAX1 , stdin);
@@ -257,8 +260,8 @@ int changeName(){ // *menu de gestao de utilizadores
 	char newln[MAX1], temp[] = "temp.txt";
 //primeira linha tem indice 0
 
-printf("\n\n ******************** Alterar Nome ******************** :\n");
-printf("-------------------------------------------------------------\n");
+puts("************************* Alterar Nome **************************");
+puts("-----------------------------------------------------------------");
 printf(" Nome do ficheiro a alterar : ");
 	fgets(fname, MAX1 , stdin);
 	fname[strlen(fname) - 1] = '\0';
@@ -332,8 +335,8 @@ int changeUsername(){ // *menu de gestao de utilizadores
 	char newln[MAX1], temp[] = "temp.txt";
 //primeira linha tem indice 0
 
-printf("\n\n ******************** Alterar Nome ******************** :\n");
-printf("-------------------------------------------------------------\n");
+puts("************************ Alterar Username ************************");
+puts("------------------------------------------------------------------");
 printf(" Nome do ficheiro a alterar : ");
 	fgets(fname, MAX1 , stdin);
 	fname[strlen(fname) - 1] = '\0';
@@ -405,8 +408,8 @@ int changePassword(){ // *menu de gestao de utilizadores
 	char newln[MAX1], temp[] = "temp.txt";
 	//primeira linha tem indice 0
 
-	printf("\n\n ******************** Alterar Palavra-Passe de Acesso Root ******************** :\n");
-	printf("-------------------------------------------------------------\n");
+	puts("******************** Alterar Palavra-Passe de Acesso Root ********************");
+	puts("------------------------------------------------------------------------------");
 	//ficheiro rootpass.txt
 	printf(" Nome do ficheiro a alterar : ");
 	fgets(fname, MAX1 , stdin);
@@ -475,7 +478,8 @@ int changePassword(){ // *menu de gestao de utilizadores
 
 void listUsers(){ // *menu de gestao de utilizadores
   FILE *Accepted;
-puts("******Lista de Utilizadores******");
+	printf("\n\n************ Listar Utilizadores ************\n");
+	printf("---------------------------------------------\n");
 Accepted = fopen("Accepted.txt", "r");
 int c;
 if (Accepted) {
@@ -490,7 +494,8 @@ system("clear");
 void editUsers(){ // *menu de gestao de utilizadores
 	unsigned int option;
 		while (1) {
-			puts("\n***** Menú de Edição de Utilizadores *****");
+			printf("\n\n************ Menú de Edição de Utilizadores ************\n");
+			printf("--------------------------------------------------------\n");
 			puts("1 - Alterar Contacto");
 			puts("2 - Alterar Nome");
 			puts("3 - Alterar Nome de Utilizador");
@@ -538,7 +543,8 @@ void editUsers(){ // *menu de gestao de utilizadores
 void topicManage() { //gestão de tópicos * main menu
 	unsigned int option;
 		while (1) {
-			puts("\n***** Menú de Gestão de Tópicos *****");
+			puts("*********** Menú de Gestão de Tópicos ************");
+			puts("--------------------------------------------------");
 			puts("1 - Listar Tópicos");
 			puts("2 - Criar Tópico");
 			puts("3 - Modificar Tópico");
@@ -633,8 +639,8 @@ return 0;
 void modifyTopic(){ // *menu gestao topicos
 	FILE * fp;
 	char fname[MAX1] ,ident[11], desc[21];
- printf("\n\n********************************************************** Modificar Tópico ****************************************************** \n");
- printf("------------------------------------------------------------------------------------------------------------------------------------\n");
+ puts("********************************************************** Modificar Tópico ******************************************************");
+ puts("-----------------------------------------------------------------------------------------------------------------------------------");
  printf("Nome do tópico. Certifique-se tem a extensão .txt : ");
  fgets(fname, MAX1 , stdin);
  printf("var=%s\n", fname); //debug
@@ -661,7 +667,8 @@ void modifyTopic(){ // *menu gestao topicos
 void Stats(){ //estatisticas * main menu
 	unsigned int option;
 		while (1) {
-			puts("\n***** Menú de Estatísticas *****");
+			printf("\n\n************ Menú de Estatísticas ************\n");
+			printf("----------------------------------------------\n");
 			puts("1 - Número de Tópicos Ativos"); //activeTopics
 			puts("2 - Lista dos Tópicos Mais Usados"); // mostUsedTopics
 			puts("3 - Número Total de Mensagens de um Determinado Tópico"); //criar menu para escolher topico totalMessages
@@ -676,11 +683,12 @@ void Stats(){ //estatisticas * main menu
 				system("clear");
 				activeTopics();
 			}
-			/*
+
 			else if (option == 2) {
 				system("clear");
 				mostUsedTopics();
 			}
+			/*
 			else if (option == 3) {
 				system("clear");
 				totalMessages();
@@ -714,7 +722,7 @@ void Stats(){ //estatisticas * main menu
 }
 void activeTopics(){ //menu estatisticas
 	puts("****************************************** Número de Tópicos Ativos ****************************************");
-	printf("--------------------------------------------------------------------------------------------------------------\n");
+	puts("------------------------------------------------------------------------------------------------------------");
 	unsigned int number_of_lines = 0;
 	FILE *f = fopen("alltopics.txt", "r");
 	int ch;
@@ -728,10 +736,22 @@ system("clear");
 Stats();
 }
 
-/*void mostUsedTopics(){ //menu estatisticas
-	//incompleto
+void mostUsedTopics(){ //menu estatisticas
+	  FILE *f;
+		puts("************ Listar Tópicos Mais Usados ************");
+		puts("----------------------------------------------------");
+	  f = fopen("mostUsedTopic.txt", "r");
+	int c;
+	if (f) {
+	  while ((c = getc(f)) != EOF)
+	      putchar(c);
+	  fclose(f);
+	}
+	sleep(2);
+	system("clear");
+	Stats();
 }
-*/
+
 /*void totalMessages(){ //menu estaticas
 	//incompleto
 }
@@ -740,7 +760,7 @@ void userInteractTopic(){ //menu estaticas
 	FILE *fp;
   char fname[MAX1];
 puts("****************************************** Tópicos Subscritos por um Determinado Utilizador ****************************************");
-	printf("------------------------------------------------------------------------------------------------------------------------------------\n");
+puts("------------------------------------------------------------------------------------------------------------------------------------");
 printf("Nome do ficheiro. Certifique-se tem a extensão .txt : ");
 scanf("%s", fname);
 printf("var=%s\n", fname); //debug
@@ -763,6 +783,8 @@ Stats();
 
 int validateUser()
 {
+	printf("\n\n************ Validar Utilizadores ************\n");
+	printf("----------------------------------------------\n");
     FILE *Accepted, *Pendent;
     char *line = NULL;
     size_t len = 0;
@@ -800,7 +822,8 @@ int validateUser()
 void Login(){
 	char kuser[5],admin1[5], rootpass1[5], password[5];
 	FILE *admin, *rootpass;
-	puts("*****************Login*****************");
+	puts("**************************** Login ***************************");
+	puts("--------------------------------------------------------------");
 	printf("\n> Introduza o nome de utilizador:  ");
 	printf("\n> Nome de utilizador:");
 	scanf("%s", kuser);
@@ -831,7 +854,9 @@ void Login(){
 void mainMenu(){
 unsigned int option;
 	while (1) {
-		puts("\n***** Menú Principal *****");
+
+		puts("****************** Menú Principal ******************");
+		puts("----------------------------------------------------");
 		puts("1 - Menú de Registo"); // Register
 		puts("2 - Menú de Gestão de Utilizadores"); // userManage
 		puts("3 - Menú de Gestão de Tópicos"); //topicManage
