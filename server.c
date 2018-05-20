@@ -18,9 +18,12 @@ int changeContact();
 int changeName();
 int changeUsername();
 void editUsers();
+int createTopic();
+void listTopic();
+
 /*
 
-void createTopic();
+
 void modifyTopic();
 void activeTopics();
 void mostUsedTopics();
@@ -539,27 +542,32 @@ void topicManage() { //gestão de tópicos * main menu
 	unsigned int option;
 		while (1) {
 			puts("\n***** Menú de Gestão de Tópicos *****");
-			puts("1 - Criar Tópico");
-			puts("2 - Modificar Tópico");
-			puts("3 - Retroceder para o Ménu Principal");
-			puts("4 - Sair");
+			puts("1 - Listar Tópicos");
+			puts("2 - Criar Tópico");
+			puts("3 - Modificar Tópico");
+			puts("4 - Retroceder para o Ménu Principal");
+			puts("5 - Sair");
 			printf("\n> ");
 			scanf("%d", &option);
 			getchar();
-			/*if (option == 1) {
+			if (option == 1) {
+				system("clear");
+				listTopic();
+			}
+			else if (option == 2) {
 				system("clear");
 				createTopic();
 			}
-			else if (option == 2) {
+			/*else if (option == 3) {
 				system("clear");
 				modifyTopic();
 			}
 			*/
-			/*else */if (option == 3) {
+			else if (option == 4) {
 				system("clear");
 				mainMenu();
 			}
-			else if (option == 4) {
+			else if (option == 5) {
 				system("clear");
 				exit(0);
 			}
@@ -572,9 +580,58 @@ void topicManage() { //gestão de tópicos * main menu
 			}
 		}
 }
-void createTopic(){ // *menu gestao topicos
+void listTopic(){ // *menu de gestao de utilizadores
+  FILE *alltopics;
+puts("***********Lista de Tópicos************");
+puts("---------------------------------------");
+alltopics = fopen("alltopics.txt", "r");
+int c;
+if (alltopics) {
+  while ((c = getc(alltopics)) != EOF)
+      putchar(c);
+  fclose(alltopics);
+}
+sleep(3);
+system("clear");
+//return;
+}
+int createTopic(){ // *menu gestao topicos
+  FILE *alltopics;
+  char *line = NULL;
+  size_t len = 0;
+  ssize_t read;
+  char fname[MAX1];
+  printf("\n\n********************************************************** Criar um novo Tópico **************************************************** \n");
+	printf("------------------------------------------------------------------------------------------------------------------------------------\n");
+	printf(" Nome do ficheiro para guardar o tópico. Certifique-se que o nome começa por topico,que está sem espaços e que tem a extensão .txt : ");
+	fgets(fname, MAX1 , stdin);
+  printf("var=%s\n", fname); //debug
+  alltopics = fopen("alltopics.txt", "r");
+      while ((read = getline(&line, &len, alltopics)) != -1) { //le alltopics.txt linha a linha
+          printf("Retrieved line of length %zu :\n", read);//debug
+          printf("%s", line);// debug
+          if(strcmp(line, fname) == 0){
+            puts("> Nome de tópico já existente. Por favor escolha um novo.");
+  					sleep(2);
+  					system("clear");
+						createTopic();
+            return 0;
+
+          }
 
 }
+//printf("var=%s\n", fname); //debug
+puts("> Nome de tópico aceite.");
+fclose(alltopics);
+alltopics = fopen("alltopics.txt", "a");
+fputs(fname, alltopics);
+fclose(alltopics);
+sleep(2);
+system("clear");
+topicManage();
+return 0;
+}
+
 
 /*void modifyTopic(){ // *menu gestao topicos
 //incompleto
