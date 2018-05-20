@@ -20,11 +20,11 @@ int changeUsername();
 void editUsers();
 int createTopic();
 void listTopic();
-
+void modifyTopic();
 /*
 
 
-void modifyTopic();
+
 void activeTopics();
 void mostUsedTopics();
 void totalMessages();
@@ -558,11 +558,11 @@ void topicManage() { //gestão de tópicos * main menu
 				system("clear");
 				createTopic();
 			}
-			/*else if (option == 3) {
+			else if (option == 3) {
 				system("clear");
 				modifyTopic();
 			}
-			*/
+
 			else if (option == 4) {
 				system("clear");
 				mainMenu();
@@ -633,10 +633,33 @@ return 0;
 }
 
 
-/*void modifyTopic(){ // *menu gestao topicos
-//incompleto
+void modifyTopic(){ // *menu gestao topicos
+	FILE * fp;
+	char fname[MAX1] ,ident[11], desc[21];
+ printf("\n\n********************************************************** Modificar Tópico ****************************************************** \n");
+ printf("------------------------------------------------------------------------------------------------------------------------------------\n");
+ printf("Nome do tópico. Certifique-se tem a extensão .txt : ");
+ fgets(fname, MAX1 , stdin);
+ printf("var=%s\n", fname); //debug
+ printf("Introduza o identificador que não exceda os 10 caracteres : ");
+ fgets(ident, MAX1 , stdin);
+ printf("ident=%s\n", ident); //debug
+ printf("Introduza a descrição que não exceda os 20 caracteres : ");
+ fgets(desc, MAX1 , stdin);
+ printf("desc=%s\n", desc); //debug
+	/* open the file for writing*/
+ fp = fopen (fname,"a");
+ printf("desc=%s\n", desc); //debug
+ printf("ident=%s\n", ident); //debug
+
+			fprintf (fp,ident);
+			fprintf (fp,desc);
+
+	/* close the file*/
+	fclose (fp);
+	sleep(2);
+	system("clear");
 }
-*/
 
 void Stats(){ //estatisticas * main menu
 	unsigned int option;
@@ -713,8 +736,8 @@ void Stats(){ //estatisticas * main menu
 
 int validateUser()
 {
-    FILE * Accepted, *Pendent;
-    char * line = NULL;
+    FILE *Accepted, *Pendent;
+    char *line = NULL;
     size_t len = 0;
     ssize_t read;
     char usernameFromClient[20];
