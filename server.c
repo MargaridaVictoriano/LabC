@@ -17,15 +17,13 @@ int removeUser();
 int changeContact();
 int changeName();
 int changeUsername();
-
-/*
-int changePassword();
 void editUsers();
+/*
+
 void createTopic();
 void modifyTopic();
 void activeTopics();
 void mostUsedTopics();
-void totalMessages();
 void totalMessages();
 void userInteractTopic();
 void subscribeTopicUser();
@@ -574,10 +572,10 @@ void topicManage() { //gestão de tópicos * main menu
 			}
 		}
 }
-/*void createTopic(){ // *menu gestao topicos
-//incompleto
+void createTopic(){ // *menu gestao topicos
+
 }
-*/
+
 /*void modifyTopic(){ // *menu gestao topicos
 //incompleto
 }
