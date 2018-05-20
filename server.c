@@ -38,7 +38,6 @@ void Register(){ //menu de registo * main menu
 			scanf("%d", &option);
 			getchar();
 			if (option == 1) {
-				puts("aaaaaaa");//debug
 				system("clear");
 				validateUser();
 
@@ -170,7 +169,6 @@ return 0;
 }
 
 int changeContact(){ // *menu de gestao de utilizadores
-	//char ch;
 	FILE *fptr1, *fptr2;
 	int lno, linectr = 0;
 	char str[MAX1],fname[MAX1];
@@ -207,7 +205,7 @@ printf(" Nome do ficheiro a alterar : ");
 	printf(" Escreva a linha que pretende alterar : ");
 	scanf("%d", &lno);
 	lno++;
-	 // copy all contents to the temporary file other except specific line
+	 // copia todo o conteudo para o ficheiro temporario exceto a linha em especifico
 	while (!feof(fptr1))
 	{
 			strcpy(str, "\0");
@@ -225,15 +223,6 @@ printf(" Nome do ficheiro a alterar : ");
 							}
 					}
 	}
-/*  fptr2=fopen(temp,"r");
-					 ch=fgetc(fptr2);
-				 printf(" Now the content of the file %s is : \n",fname);
-				 while(ch!=EOF)
-					 {
-							 printf("%c",ch);
-								ch=fgetc(fptr1);
-					 }
-*/
 	fclose(fptr1);
 	fclose(fptr2);
 	remove(fname);
@@ -246,7 +235,6 @@ printf(" Nome do ficheiro a alterar : ");
 
 int changeName(){ // *menu de gestao de utilizadores
 	//ficheiro a abrir e nome.txt
-	//char ch;
 	FILE *fptr1, *fptr2;
 	int lno, linectr = 0;
 	char str[MAX1],fname[MAX1];
@@ -282,7 +270,7 @@ printf(" Nome do ficheiro a alterar : ");
 	printf(" Escreva a linha que pretende alterar : ");
 	scanf("%d", &lno);
 	lno++;
-	 // copy all contents to the temporary file other except specific line
+	 // copia o conteudo para o ficheiro temporario com exceçao da linha em especifico
 	while (!feof(fptr1))
 	{
 			strcpy(str, "\0");
@@ -300,15 +288,6 @@ printf(" Nome do ficheiro a alterar : ");
 							}
 					}
 	}
-/*  fptr2=fopen(temp,"r");
-					 ch=fgetc(fptr2);
-				 printf(" Now the content of the file %s is : \n",fname);
-				 while(ch!=EOF)
-					 {
-							 printf("%c",ch);
-								ch=fgetc(fptr1);
-					 }
-*/
 	fclose(fptr1);
 	fclose(fptr2);
 	remove(fname);
@@ -321,7 +300,6 @@ printf(" Nome do ficheiro a alterar : ");
 
 int changeUsername(){ // *menu de gestao de utilizadores
 	//ficheiro a abrir e Accepted.txt
-	//char ch;
 	FILE *fptr1, *fptr2;
 	int lno, linectr = 0;
 	char str[MAX1],fname[MAX1];
@@ -357,7 +335,7 @@ printf(" Nome do ficheiro a alterar : ");
 	printf(" Escreva a linha que pretende alterar : ");
 	scanf("%d", &lno);
 	lno++;
-	 // copy all contents to the temporary file other except specific line
+	 // copia o conteudo para o ficheiro temporario exceto a linha em especifico
 	while (!feof(fptr1))
 	{
 			strcpy(str, "\0");
@@ -375,15 +353,6 @@ printf(" Nome do ficheiro a alterar : ");
 							}
 					}
 	}
-/*  fptr2=fopen(temp,"r");
-					 ch=fgetc(fptr2);
-				 printf(" Now the content of the file %s is : \n",fname);
-				 while(ch!=EOF)
-					 {
-							 printf("%c",ch);
-								ch=fgetc(fptr1);
-					 }
-*/
 	fclose(fptr1);
 	fclose(fptr2);
 	remove(fname);
@@ -394,7 +363,6 @@ printf(" Nome do ficheiro a alterar : ");
 	return 0;
 }
 int changePassword(){ // *menu de gestao de utilizadores
-	//char ch;
 	FILE *fptr1, *fptr2;
 	int lno, linectr = 0;
 	char str[MAX1],fname[MAX1];
@@ -431,7 +399,7 @@ int changePassword(){ // *menu de gestao de utilizadores
 	printf(" Escreva a linha que pretende alterar : "); // é sempre a linha 0
 	scanf("%d", &lno);
 	lno++;
-	 // copy all contents to the temporary file other except specific line
+	 // // copia o conteudo para o ficheiro temporario exceto a linha em especifico
 	while (!feof(fptr1))
 	{
 			strcpy(str, "\0");
@@ -449,15 +417,6 @@ int changePassword(){ // *menu de gestao de utilizadores
 							}
 					}
 	}
-	/*  fptr2=fopen(temp,"r");
-					 ch=fgetc(fptr2);
-				 printf(" Now the content of the file %s is : \n",fname);
-				 while(ch!=EOF)
-					 {
-							 printf("%c",ch);
-								ch=fgetc(fptr1);
-					 }
-	*/
 	fclose(fptr1);
 	fclose(fptr2);
 	remove(fname);
@@ -482,7 +441,6 @@ if (Accepted) {
 }
 sleep(2);
 system("clear");
-//return;
 }
 void editUsers(){ // *menu de gestao de utilizadores
 	unsigned int option;
@@ -589,7 +547,6 @@ if (alltopics) {
 }
 sleep(3);
 system("clear");
-//return;
 }
 int createTopic(){ // *menu gestao topicos
   FILE *alltopics;
@@ -601,11 +558,11 @@ int createTopic(){ // *menu gestao topicos
 	printf("------------------------------------------------------------------------------------------------------------------------------------\n");
 	printf(" Nome do ficheiro para guardar o tópico. Certifique-se que o nome começa por topico,que está sem espaços e que tem a extensão .txt : ");
 	fgets(fname, MAX1 , stdin);
-  printf("var=%s\n", fname); //debug
+  printf("var=%s\n", fname);
   alltopics = fopen("alltopics.txt", "r");
       while ((read = getline(&line, &len, alltopics)) != -1) { //le alltopics.txt linha a linha
-          printf("Retrieved line of length %zu :\n", read);//debug
-          printf("%s", line);// debug
+          printf("Retrieved line of length %zu :\n", read);
+          printf("%s", line);
           if(strcmp(line, fname) == 0){
             puts("> Nome de tópico já existente. Por favor escolha um novo.");
   					sleep(2);
@@ -616,7 +573,7 @@ int createTopic(){ // *menu gestao topicos
           }
 
 }
-//printf("var=%s\n", fname); //debug
+
 puts("> Nome de tópico aceite.");
 fclose(alltopics);
 alltopics = fopen("alltopics.txt", "a");
@@ -636,22 +593,17 @@ void modifyTopic(){ // *menu gestao topicos
  puts("-----------------------------------------------------------------------------------------------------------------------------------");
  printf("Nome do tópico. Certifique-se tem a extensão .txt : ");
  fgets(fname, MAX1 , stdin);
- printf("var=%s\n", fname); //debug
  printf("Introduza o identificador que não exceda os 10 caracteres : ");
  fgets(ident, MAX1 , stdin);
- printf("ident=%s\n", ident); //debug
  printf("Introduza a descrição que não exceda os 20 caracteres : ");
  fgets(desc, MAX1 , stdin);
- printf("desc=%s\n", desc); //debug
-	/* open the file for writing*/
+	/* abre o ficheiro em modo de leitura*/
  fp = fopen (fname,"a");
- printf("desc=%s\n", desc); //debug
- printf("ident=%s\n", ident); //debug
 
 			fprintf (fp,ident);
 			fprintf (fp,desc);
 
-	/* close the file*/
+	/* fechar o ficheiro*/
 	fclose (fp);
 	sleep(2);
 	system("clear");
@@ -740,7 +692,6 @@ puts("****************************************** Tópicos Subscritos por um Dete
 puts("------------------------------------------------------------------------------------------------------------------------------------");
 printf("Nome do ficheiro. Certifique-se tem a extensão .txt : ");
 scanf("%s", fname);
-printf("var=%s\n", fname); //debug
 fp = fopen(fname, "r");
 int c;
 if (fp) {
@@ -752,12 +703,6 @@ sleep(4);
 system("clear");
 Stats();
 }
-
-/*void subscribeTopicUser(){ //menu estaticas
-	//incompleto
-}
-*/
-
 int validateUser()
 {
 	printf("\n\n************ Validar Utilizadores ************\n");
@@ -773,11 +718,8 @@ int validateUser()
         exit(EXIT_FAILURE);
     Pendent = fopen("Pendent.txt", "r+");
     fgets(usernameFromClient, 20, Pendent);
-    printf("Pendent= %s\n",usernameFromClient);//debug
 
     while ((read = getline(&line, &len, Accepted)) != -1) { //le Accepted.txt linha a linha
-        printf("Retrieved line of length %zu :\n", read);//debug
-        printf("%s", line);// debug
         if(strcmp(line, usernameFromClient) == 0){
           puts("> Nome de utilizador já existente. Por favor escolha um novo que não exceda os 20 carateres.");
 					sleep(3);
@@ -875,11 +817,5 @@ unsigned int option;
 int main(void){
 system("clear");
 Login();
-//mainMenu();
-//Register();
-//listUsers();
-
-//userManage();
-//Stats();
 return 0;
 }
