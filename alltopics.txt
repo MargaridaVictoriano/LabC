@@ -1,0 +1,10 @@
+reverse.txt
+crypto.txt
+network.txt
+labc.txt
+c.txt
+bash.txt
+infosec.txt
+sql.txt
+alex.txt
+topico.txt
